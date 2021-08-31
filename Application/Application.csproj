@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.Specification" Version="5.1.0" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="10.3.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="features\safiContract\parameters\" />
+    <Folder Include="features\safiContract\queries\" />
+    <Folder Include="features\safiContract\validators\" />
+    <Folder Include="features\safiFundRequirement\commands\" />
+    <Folder Include="features\safiFundRequirement\parameters\" />
+    <Folder Include="features\safiFundRequirement\queries\" />
+    <Folder Include="features\safiFundRequirement\validators\" />
+    <Folder Include="features\safiFund\commands\" />
+    <Folder Include="features\safiFund\parameters\" />
+    <Folder Include="features\safiFund\validators\" />
+    <Folder Include="features\safiOpeningRequest\commands\" />
+    <Folder Include="features\safiOpeningRequest\parameters\" />
+    <Folder Include="features\safiOpeningRequest\queries\" />
+    <Folder Include="features\safiOpeningRequest\validators\" />
+    <Folder Include="filters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>
