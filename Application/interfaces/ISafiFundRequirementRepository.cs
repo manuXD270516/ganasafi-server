@@ -1,4 +1,5 @@
 ﻿using Application.dtos;
+using Application.helpers;
 using Application.parameters;
 using Domain.entities;
 using System;
@@ -14,6 +15,7 @@ namespace Application.interfaces
     {
 
         Task<IQueryable<GetSafiFundRequirementDto>> FindAllRequirementCustom(
+            Dictionary<string,int> additionalProps,
             Expression<Func<GetSafiFundRequirementDto, bool>> filter = null,
             Func<IQueryable<GetSafiFundRequirementDto>, IOrderedQueryable<GetSafiFundRequirementDto>> orderBy = null,
             RequestParameter pagination = null

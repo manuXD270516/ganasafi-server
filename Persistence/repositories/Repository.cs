@@ -1,4 +1,5 @@
-﻿using Application.interfaces;
+﻿using Application.helpers;
+using Application.interfaces;
 using Application.parameters;
 using Application.wrappers;
 using Dapper.Contrib.Extensions;
@@ -100,6 +101,7 @@ namespace Persistence.repositories
         }
 
         public async Task<IQueryable<TEntity>> FindAllAsync(
+            Dictionary<string, int> additionalProps,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
             RequestParameter pagination = null)
@@ -109,6 +111,8 @@ namespace Persistence.repositories
             {
                 var results = (await DbConnection.GetAllAsync<TEntity>())
                     .AsQueryable();
+
+                additionalProps[HelpersConstApplication.KEY_TOTAL_COUNT] = results.Count();
 
                 if (pagination != null)
                 {

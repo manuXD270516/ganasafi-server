@@ -1,4 +1,5 @@
-﻿using Application.parameters;
+﻿using Application.helpers;
+using Application.parameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Application.interfaces
     public interface IRepository<TEntity> where TEntity : class
     {
         Task<IQueryable<TEntity>> FindAllAsync(
+            Dictionary<string, int> additionalProps,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             RequestParameter pagination = null

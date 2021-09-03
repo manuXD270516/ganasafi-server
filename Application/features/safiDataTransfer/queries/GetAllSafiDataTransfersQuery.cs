@@ -1,4 +1,5 @@
 ﻿using Application.dtos;
+using Application.helpers;
 using Application.interfaces;
 using Application.parameters;
 using Application.specifications;
@@ -57,7 +58,10 @@ namespace Application.features.safiDataTransfer.queries
                 orderByDirection: request.orderByDirection
             );
 
+            Dictionary<string, int> additionalPropsFromRequest = new Dictionary<string, int>();
+
             var result = await _unitOfWork._safiDataTransferRepository.FindAllAsync(
+                additionalProps: additionalPropsFromRequest,
                 pagination: pageableParam,
                 filter: (f) => double.IsNaN(request.accountNumber) || request.accountNumber<=0 ? true : f.accountNumber == request.accountNumber,
                 orderBy: (ord) => string.IsNullOrEmpty(pageableParam.orderByDirection) || pageableParam.orderByDirection.Equals("ASC")
@@ -67,7 +71,12 @@ namespace Application.features.safiDataTransfer.queries
 
             List<SafiDataTransferDto> mapperList = _mapper.Map<List<SafiDataTransferDto>>(result);
 
-            return new PageResponse<List<SafiDataTransferDto>>(mapperList, request.pageNumber, request.pageSize);
+            return new PageResponse<List<SafiDataTransferDto>>(
+                mapperList,
+                request.pageNumber, 
+                request.pageSize, 
+                additionalPropsFromRequest[HelpersConstApplication.KEY_TOTAL_COUNT]
+            ) ;
         }
 
 

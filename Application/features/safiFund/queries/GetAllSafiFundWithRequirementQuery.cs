@@ -1,4 +1,5 @@
 ﻿using Application.dtos;
+using Application.helpers;
 using Application.interfaces;
 using Application.parameters;
 using Application.wrappers;
@@ -56,7 +57,10 @@ namespace Application.features.safiFund.queries
                orderByDirection: request.orderByDirection
            );
 
+            Dictionary<string, int> additionalPropsFromRequest = new Dictionary<string, int>();
+
             var result = await _unitOfWork._safiFundRequirementRepository.FindAllRequirementCustom(
+                additionalProps: additionalPropsFromRequest,
              pagination: pageableParam,
              filter: (f) => string.IsNullOrEmpty(request.personTypeCode) ? true : f.personTypeCode == request.personTypeCode,
              orderBy: (ord) => string.IsNullOrEmpty(pageableParam.orderByDirection) || pageableParam.orderByDirection.Equals("ASC")
@@ -64,8 +68,12 @@ namespace Application.features.safiFund.queries
                          : ord.OrderByDescending(p => p.safiFundId)
             );
 
-            
-            return new PageResponse<List<GetSafiFundRequirementDto>>(result.ToList(), request.pageNumber, request.pageSize);
+            return new PageResponse<List<GetSafiFundRequirementDto>>(
+                result.ToList(),
+                request.pageNumber, 
+                request.pageSize,
+                additionalPropsFromRequest[HelpersConstApplication.KEY_TOTAL_COUNT]
+            );
         }
     }
 }

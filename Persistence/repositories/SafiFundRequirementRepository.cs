@@ -1,4 +1,5 @@
 ﻿using Application.dtos;
+using Application.helpers;
 using Application.interfaces;
 using Application.parameters;
 using Dapper;
@@ -20,6 +21,7 @@ namespace Persistence.repositories
         }
 
         public async Task<IQueryable<GetSafiFundRequirementDto>> FindAllRequirementCustom(
+            Dictionary<string, int> additionalProps,
             Expression<Func<GetSafiFundRequirementDto, bool>> filter = null,
             Func<IQueryable<GetSafiFundRequirementDto>, IOrderedQueryable<GetSafiFundRequirementDto>> orderBy = null, 
             RequestParameter pagination = null)
@@ -31,6 +33,8 @@ namespace Persistence.repositories
             var safiFoundCollection = (await DbConnection.QueryAsync<GetSafiFundRequirementDto>(sql, null))
                 .AsQueryable();
 
+            additionalProps[HelpersConstApplication.KEY_TOTAL_COUNT] = safiFoundCollection.Count();
+            
             if (pagination != null)
             {
                 int pageNumber = pagination.pageNumber, pageSize = pagination.pageSize;
