@@ -15,8 +15,9 @@ namespace Domain.entities
         public string headline { get; set; }
 
         public string description { get; set; }
-  
-        
+
+        //public override int GetHashCode() => id.GetHashCode();
+
 
     }
 }

@@ -23,6 +23,6 @@ namespace Application.interfaces
 
         Task<GetSafiFundRequirementDto> FindFirstOrDefault(Expression<Func<GetSafiFundRequirementDto, bool>> filter = null);
 
-        Task<GetSafiFundRequirementDto> FindBySafiFundId(int safiFundId);
+        Task<SafiFund> FindBySafiFundId(int safiFundId);
     }
 }

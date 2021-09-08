@@ -18,6 +18,7 @@ namespace Application.mappings
             CreateMap<List<SafiDataTransfer>, List<SafiDataTransferDto>>();
 
             CreateMap<UpdateSafiDataTransferCommand, SafiDataTransfer> ();
+
         }
     }
 }

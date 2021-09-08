@@ -1,15 +1,12 @@
-﻿using Dapper.Contrib.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Domain.helpers.HelpersDatabase;
 
-
-namespace Domain.entities
+namespace Application.dtos
 {
-    [Table(TABLE_NAME_SAFI_FUND)]
-    public class SafiFund : AuditableBaseEntity
+    public class GetSafiFundRequirementByIdDto
     {
+
         public string code { get; set; }
         public string title { get; set; }
         public string description { get; set; }
@@ -20,14 +17,6 @@ namespace Domain.entities
         public string permitedRescues { get; set; }
         public string target { get; set; }
 
-        #region "Relationships ingoing"
-
-        public List<SafiFundRequirement> safiFundRequirements{ get; set; }
-
-        #endregion
-
-        //public override int GetHashCode() => id.GetHashCode();  
-        
-
+        public List<SafiFundRequirementDto> safiFundRequirements { get; set; }
     }
 }

@@ -10,9 +10,15 @@ namespace Domain.entities
     public class SafiFundRequirement : AuditableBaseEntity
     {
 
-        public SafiFund safiFund { get; set; }
         public string idPersonType { get; set; }
         public string description { get; set; }
 
+        #region "Relationships outgoing"
+
+        public SafiFund safiFund { get; set; }
+
+        #endregion
+
+       
     }
 }
