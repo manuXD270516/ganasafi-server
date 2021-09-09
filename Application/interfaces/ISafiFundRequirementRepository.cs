@@ -14,15 +14,6 @@ namespace Application.interfaces
     public interface ISafiFundRequirementRepository : IRepository<SafiFundRequirement>
     {
 
-        Task<IQueryable<GetSafiFundRequirementDto>> FindAllRequirementCustom(
-            Dictionary<string,int> additionalProps,
-            Expression<Func<GetSafiFundRequirementDto, bool>> filter = null,
-            Func<IQueryable<GetSafiFundRequirementDto>, IOrderedQueryable<GetSafiFundRequirementDto>> orderBy = null,
-            RequestParameter pagination = null
-        );
-
-        Task<GetSafiFundRequirementDto> FindFirstOrDefault(Expression<Func<GetSafiFundRequirementDto, bool>> filter = null);
-
-        Task<SafiFund> FindBySafiFundId(int safiFundId);
+      
     }
 }

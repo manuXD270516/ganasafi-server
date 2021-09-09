@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.dtos
 {
-    public class GetSafiFundRequirementDto
+    public class GetSafiFundDto
     {
         public int safiFundId { get; set; }
         public string safiFundCode { get; set; }
@@ -17,7 +17,7 @@ namespace Application.dtos
         public string permittedRescues { get; set; }
         public string target { get; set; }
 
-        public string descFundRequirement { get; set; }
+        //public string descFundRequirement { get; set; }
         public string personTypeCode { get; set; }
 
 

@@ -16,9 +16,9 @@ namespace rest_api_ganasafi.Controllers.v1
     {
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllSafiFundWithRequirementParameter parameters)
+        public async Task<IActionResult> Get([FromQuery] GetAllSafiByFilterParameter parameters)
         {
-            return Ok(await Mediator.Send(new GetAllSafiFundWithRequirementQuery
+            return Ok(await Mediator.Send(new GetAllSafiFundQuery
             {
                 pageNumber = parameters.pageNumber,
                 pageSize = parameters.pageSize,
@@ -30,7 +30,7 @@ namespace rest_api_ganasafi.Controllers.v1
         [HttpGet(ROUTE_PARAM_ID)]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return Ok(await Mediator.Send(new GetSafiFundWithRequirementByIdQuery
+            return Ok(await Mediator.Send(new GetSafiFundByIdQuery
             {
                 id = id
             }));

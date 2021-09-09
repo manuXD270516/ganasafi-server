@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Application.features.safiFund.queries
 {
-    public class GetAllSafiFundWithRequirementQuery : IRequest<PageResponse<List<GetSafiFundRequirementDto>>>
+    public class GetAllSafiFundQuery : IRequest<PageResponse<List<GetSafiFundDto>>>
     {
         #region "Pagination Params"
         public int pageNumber { get; set; }
@@ -34,21 +34,21 @@ namespace Application.features.safiFund.queries
 
     }
 
-    public class GetAllSafiFundWithRequirementQueryHandler : IRequestHandler<GetAllSafiFundWithRequirementQuery, PageResponse<List<GetSafiFundRequirementDto>>>
+    public class GetAllSafiFundQueryHandler : IRequestHandler<GetAllSafiFundQuery, PageResponse<List<GetSafiFundDto>>>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
 
-        public GetAllSafiFundWithRequirementQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetAllSafiFundQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
 
-        public async Task<PageResponse<List<GetSafiFundRequirementDto>>> Handle(GetAllSafiFundWithRequirementQuery request, CancellationToken cancellationToken)
+        public async Task<PageResponse<List<GetSafiFundDto>>> Handle(GetAllSafiFundQuery request, CancellationToken cancellationToken)
         {
             var pageableParam = new RequestParameter
            (
@@ -59,7 +59,7 @@ namespace Application.features.safiFund.queries
 
             Dictionary<string, int> additionalPropsFromRequest = new Dictionary<string, int>();
 
-            var result = await _unitOfWork._safiFundRequirementRepository.FindAllRequirementCustom(
+            var result = await _unitOfWork._safiFundRepository.FindAllByFilter(
                 additionalProps: additionalPropsFromRequest,
              pagination: pageableParam,
              filter: (f) => string.IsNullOrEmpty(request.personTypeCode) ? true : f.personTypeCode == request.personTypeCode,
@@ -68,7 +68,7 @@ namespace Application.features.safiFund.queries
                          : ord.OrderByDescending(p => p.safiFundId)
             );
 
-            return new PageResponse<List<GetSafiFundRequirementDto>>(
+            return new PageResponse<List<GetSafiFundDto>>(
                 result.ToList(),
                 request.pageNumber, 
                 request.pageSize,

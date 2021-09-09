@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.features.safiDataTransfer.parameters
 {
-    public class GetAllSafiFundWithRequirementParameter : RequestParameter
+    public class GetAllSafiByFilterParameter : RequestParameter
     {
         public string personTypeCode { get; set; }
     }

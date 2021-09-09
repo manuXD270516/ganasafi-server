@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Application.features.safiFund.queries
 {
-    public class GetSafiFundWithRequirementByIdQuery : IRequest<Response<GetSafiFundRequirementByIdDto>>
+    public class GetSafiFundByIdQuery : IRequest<Response<GetSafiFundRequirementByIdDto>>
     {
         public int id { get; set; }
        
     }
 
-    public class GetSafiFundWithRequirementByIdQueryHandler : IRequestHandler<GetSafiFundWithRequirementByIdQuery, Response<GetSafiFundRequirementByIdDto>>
+    public class GetSafiFundWithRequirementByIdQueryHandler : IRequestHandler<GetSafiFundByIdQuery, Response<GetSafiFundRequirementByIdDto>>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -30,9 +30,9 @@ namespace Application.features.safiFund.queries
             _mapper = mapper;
         }
 
-        public async Task<Response<GetSafiFundRequirementByIdDto>> Handle(GetSafiFundWithRequirementByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<GetSafiFundRequirementByIdDto>> Handle(GetSafiFundByIdQuery request, CancellationToken cancellationToken)
         {
-            var safiFundWithRequirementFind = await _unitOfWork._safiFundRequirementRepository.FindBySafiFundId(request.id);
+            var safiFundWithRequirementFind = await _unitOfWork._safiFundRepository.FindBySafiFundId(request.id);
             if (safiFundWithRequirementFind == null)
             {
                 throw new KeyNotFoundException($"SAFI Fund Requirement not found with Id: {request.id}");

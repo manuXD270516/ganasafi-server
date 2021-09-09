@@ -44,8 +44,8 @@ namespace rest_api_ganasafi.Middlewares
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
 
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
                     case ValidationException validationException:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
                         result.errors = validationException._errors;
                         break;
 
