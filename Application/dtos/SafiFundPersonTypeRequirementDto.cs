@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Application.dtos
 {
-    public class SafiFundRequirementDto
+    public class SafiFundPersonTypeRequirementDto
     {
-        public string idPersonType { get; set; }
         public string description { get; set; }
+        public string shortDescription { get; set; }
+
     }
 }

@@ -6,16 +6,14 @@ using static Domain.helpers.HelpersDatabase;
 
 namespace Domain.entities
 {
-    [Table(TABLE_NAME_SAFI_FUND_REQUIREMENT)]
-    public class SafiFundRequirement : AuditableBaseEntity
+    [Table(TABLE_NAME_SAFI_FUND_PERSON_TYPE_REQUIREMENT)]
+    public class SafiFundPersonTypeRequirement : AuditableBaseEntity
     {
-
-        public string idPersonType { get; set; }
-        public string description { get; set; }
 
         #region "Relationships outgoing"
 
-        public SafiFund safiFund { get; set; }
+        public SafiFundPersonType safiFundPersonType { get; set; }
+        public Classifier clsRequirement{ get; set; }
 
         #endregion
 

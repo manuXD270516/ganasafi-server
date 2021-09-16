@@ -16,6 +16,18 @@ namespace Domain.entities
 
         public string description { get; set; }
 
+        #region "Relationships ingoing"
+
+
+        #endregion
+
+        #region "Relationship outgoing"
+
+        public List<SafiFund> safiFunds { get; set; }
+
+
+        #endregion
+
         //public override int GetHashCode() => id.GetHashCode();
 
 

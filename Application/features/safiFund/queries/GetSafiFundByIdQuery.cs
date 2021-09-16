@@ -14,7 +14,11 @@ namespace Application.features.safiFund.queries
     public class GetSafiFundByIdQuery : IRequest<Response<GetSafiFundRequirementByIdDto>>
     {
         public int id { get; set; }
-       
+
+        #region "Filter params"
+        public string personTypeCode { get; set; }
+        #endregion
+
     }
 
     public class GetSafiFundWithRequirementByIdQueryHandler : IRequestHandler<GetSafiFundByIdQuery, Response<GetSafiFundRequirementByIdDto>>
@@ -32,7 +36,7 @@ namespace Application.features.safiFund.queries
 
         public async Task<Response<GetSafiFundRequirementByIdDto>> Handle(GetSafiFundByIdQuery request, CancellationToken cancellationToken)
         {
-            var safiFundWithRequirementFind = await _unitOfWork._safiFundRepository.FindBySafiFundId(request.id);
+            var safiFundWithRequirementFind = await _unitOfWork._safiFundRepository.FindBySafiFundId(request.id, request.personTypeCode);
             if (safiFundWithRequirementFind == null)
             {
                 throw new KeyNotFoundException($"SAFI Fund Requirement not found with Id: {request.id}");

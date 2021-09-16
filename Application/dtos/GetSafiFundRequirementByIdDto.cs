@@ -14,9 +14,10 @@ namespace Application.dtos
         public string currency { get; set; }
         public double minimunOpeningRequest { get; set; }
         public string image { get; set; }
-        public string permitedRescues { get; set; }
+        public string permittedRescues { get; set; }
         public string target { get; set; }
 
-        public List<SafiFundRequirementDto> safiFundRequirements { get; set; }
+        public List<SafiFundPersonTypeDto> safiFundPersonTypeDtos {get; set; }
+        //public List<SafiFundPersonTypeRequirementDto> safiFundRequirements { get; set; }
     }
 }

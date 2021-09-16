@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.interfaces
 {
-    public interface ISafiFundRequirementRepository : IRepository<SafiFundRequirement>
+    public interface ISafiFundRequirementRepository : IRepository<SafiFundPersonTypeRequirement>
     {
 
       

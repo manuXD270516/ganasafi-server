@@ -13,8 +13,8 @@ namespace Application.mappings
         public SafiFundProfile()
         {
 
-            CreateMap<SafiFund, GetSafiFundRequirementByIdDto>();
-                //.ForMember(dest => dest.safiFundRequirements, o => o.MapFrom(src => src.safiFundRequirements));
+            CreateMap<SafiFund, GetSafiFundRequirementByIdDto>()
+                .ForMember(dest => dest.safiFundPersonTypeDtos, o => o.MapFrom(src => src.safiFundPersonTypes));
         }
 
         

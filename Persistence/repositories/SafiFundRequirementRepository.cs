@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.repositories
 {
-    public class SafiFundRequirementRepository : Repository<SafiFundRequirement>, ISafiFundRequirementRepository
+    public class SafiFundRequirementRepository : Repository<SafiFundPersonTypeRequirement>, ISafiFundRequirementRepository
     {
         public SafiFundRequirementRepository(DatabaseSettings dbSettings) : base(dbSettings)
         {

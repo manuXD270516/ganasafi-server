@@ -1,4 +1,5 @@
 ﻿using Application.features.safiDataTransfer.parameters;
+using Application.features.safiFund.parameters;
 using Application.features.safiFund.queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace rest_api_ganasafi.Controllers.v1
     {
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllSafiByFilterParameter parameters)
+        public async Task<IActionResult> Get([FromQuery] GetAllSafiFundFilterParameter parameters)
         {
             return Ok(await Mediator.Send(new GetAllSafiFundQuery
             {
@@ -28,11 +29,12 @@ namespace rest_api_ganasafi.Controllers.v1
         }
 
         [HttpGet(ROUTE_PARAM_ID)]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id, [FromQuery] GetSafiFundBydIdFilterParameter parameters)
         {
             return Ok(await Mediator.Send(new GetSafiFundByIdQuery
             {
-                id = id
+                id = id,
+                personTypeCode = parameters.personTypeCode
             }));
         }
     }

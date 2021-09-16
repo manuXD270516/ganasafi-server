@@ -22,6 +22,6 @@ namespace Application.interfaces
 
         Task<GetSafiFundDto> FindFirstOrDefault(Expression<Func<GetSafiFundDto, bool>> filter = null);
 
-        Task<SafiFund> FindBySafiFundId(int safiFundId);
+        Task<SafiFund> FindBySafiFundId(int safiFundId, string codPersonType);
     }
 }

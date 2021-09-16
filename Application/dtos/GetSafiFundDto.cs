@@ -10,7 +10,7 @@ namespace Application.dtos
         public string safiFundCode { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public string shortDescription { get; set; }
+        public string shortDescription { get; set; }    
         public string currency { get; set; }
         public double minimunOpeningAmount { get; set; }
         public string image { get; set; }

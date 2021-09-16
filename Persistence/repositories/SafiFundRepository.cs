@@ -53,16 +53,22 @@ namespace Persistence.repositories
 
         }
 
-        public async Task<SafiFund> FindBySafiFundId(int safiFundId)
+        public async Task<SafiFund> FindBySafiFundId(int safiFundId, string personTypeCode = "")
         {
 
-            var sql = "select * from GANADERO.SAFIFUND S inner join GANADERO.SAFIFUNDREQUIREMENT SR on S.id = SR.\"idFund\" where S.id = @safiFoundId";
-            //var sql = "select v.* from ganadero.vw_GetSafiFundWithRequirementAssociate v where v.\"safiFundId\" = @safiFoundId fetch first row only";
-            var parameters = new { safiFoundId = safiFundId };
-            var safiFundDictionary = new Dictionary<int, SafiFund>();
 
-            var safiFoundCollection = (await DbConnection.QueryAsync<SafiFund, SafiFundRequirement, SafiFund>(sql,
-                (safiFund, safiFundRequirement) =>
+            var sql = "select * from GANADERO.SAFIFUND S inner join GANADERO.SAFIFUNDPERSONTYPE S2 on S2.\"idFund\" = s.id inner join GANADERO.CLASSIFIER P on S2.\"idClsPersonType\" = P.id inner join GANADERO.SAFIFUNDPERSONTYPEREQUIREMENT S3 on S3.\"idFundPersonType\" = s2.id inner join GANADERO.CLASSIFIER C on S3.\"idClsRequirement\" = C.id where S.id = @safiFoundId and P.abbreviation LIKE CONCAT('%',@personTypeCode,'%')";
+            //var sql = "select * from GANADERO.SAFIFUND S inner join GANADERO.SAFIFUNDPERSONTYPE S2 on S2.\"idFund\" = s.id inner join GANADERO.SAFIFUNDPERSONTYPEREQUIREMENT S3 on S3.\"idFundPersonType\" = s2.id inner join GANADERO.CLASSIFIER C on S3.\"idClsRequirement\" = C.id where S.id = @safiFoundId";
+            //var sql = "select * from GANADERO.SAFIFUND S inner join GANADERO.SAFIFUNDREQUIREMENT SR on S.id = SR.\"idFund\" where S.id = @safiFoundId";
+            //var sql = "select v.* from ganadero.vw_GetSafiFundWithRequirementAssociate v where v.\"safiFundId\" = @safiFoundId fetch first row only";
+            var parameters = new { safiFoundId = safiFundId, personTypeCode = personTypeCode };
+
+            var safiFundDictionary = new Dictionary<int, SafiFund>();
+            //var safiFundPersonTypeDictionary = new Dictionary<int, SafiFundPersonType>();
+
+            
+            var safiFoundCollection = (await DbConnection.QueryAsync<SafiFund, SafiFundPersonType, Classifier, SafiFundPersonTypeRequirement, Classifier, SafiFund>(sql,
+                (safiFund, safiFundPersonTypes, clsPersonType, safiFundPersonTypeRequirements, clsRequirement) =>
                 {
 
                     SafiFund safiFundEntry;
@@ -70,11 +76,37 @@ namespace Persistence.repositories
                     if (!safiFundDictionary.TryGetValue(safiFund.id, out safiFundEntry))
                     {
                         safiFundEntry = safiFund;
-                        safiFundEntry.safiFundRequirements = new List<SafiFundRequirement>();
+                        safiFundEntry.safiFundPersonTypes = new List<SafiFundPersonType>();
+                        safiFundPersonTypes.safiFundPersonTypeRequirements = new List<SafiFundPersonTypeRequirement>();
+                        safiFundPersonTypes.clsRequirements = new List<Classifier>();
+
+                        //safiFundEntry.safiFundRequirements = new List<SafiFundPersonTypeRequirement>();
+
                         safiFundDictionary.Add(safiFundEntry.id, safiFundEntry);
                     }
 
-                    safiFundEntry.safiFundRequirements.Add(safiFundRequirement);
+                    int index = safiFundEntry.safiFundPersonTypes.FindIndex(x => x.clsPersonType.id == clsPersonType.id);
+                    if (index >= 0)
+                    {
+                        safiFundEntry.safiFundPersonTypes[index].clsRequirements.Add(clsRequirement);
+                        safiFundEntry.safiFundPersonTypes[index].clsPersonType = clsPersonType;
+
+                    } else
+                    {
+                        safiFundPersonTypes.clsRequirements.Add(clsRequirement);
+                        safiFundPersonTypes.clsPersonType = clsPersonType;
+                        safiFundEntry.safiFundPersonTypes.Add(safiFundPersonTypes);
+                    }
+                    //safiFundEntry.safiFundPersonTypes
+                    //safiFundPersonTypeRequirements.clsRequirement = clsRequirement;
+                    //safiFundPersonTypeRequirements.clsRequirement
+
+                    //safiFundPersonTypes.safiFundPersonTypeRequirements.Add(safiFundPersonTypeRequirements);
+                    
+
+                    //safiFundEntry.safiFundPersonTypes.Add(safiFundPersonTypes);
+
+                    //safiFundEntry.safiFundRequirements.Add(safiFundPersonTypeRequirement);
                     return safiFundEntry;
                 }
                 , param: parameters))

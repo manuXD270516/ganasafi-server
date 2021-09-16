@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.features.safiDataTransfer.parameters
+namespace Application.features.safiFund.parameters
 {
-    public class GetAllSafiByFilterParameter : RequestParameter
+    public class GetAllSafiFundFilterParameter : RequestParameter
     {
         public string personTypeCode { get; set; }
     }
