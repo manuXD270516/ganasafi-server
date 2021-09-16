@@ -12,7 +12,7 @@ namespace Application.mappings
         public SafiFundPersonTypeProfile()
         {
             CreateMap<SafiFundPersonType, SafiFundPersonTypeDto>()
-                
+                .ForMember(src => src.safiFundPersonTypeId, opt => opt.MapFrom(org => org.id))
                 .ForMember(src => src.safiFundPersonTypeRequirementDtos, opt => opt.MapFrom(org => org.clsRequirements))
                 .ForMember(src => src.codPersonType, opt => opt.MapFrom(org => org.clsPersonType.abbreviation))
                 .ForMember(src => src.shortDescription, opt => opt.MapFrom(org => org.clsPersonType.shortDescription))
