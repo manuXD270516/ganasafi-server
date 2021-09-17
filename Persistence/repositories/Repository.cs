@@ -162,5 +162,22 @@ namespace Persistence.repositories
             }
             finally { DbConnection.Close(); }
         }
+
+        public async Task<TEntity> FindFirstOrDefault(Expression<Func<TEntity, bool>> filter = null)
+        {
+            DbConnection.Open();
+            try
+            {
+                var results = (await DbConnection.GetAllAsync<TEntity>())
+                    .AsQueryable();
+
+                if (filter != null)
+                {
+                    results = results.Where(filter);
+                }
+                return results.FirstOrDefault();
+            }
+            finally { DbConnection.Close(); }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Domain.entities
     {
 
         #region "Relationships outgoing"
-
+        
         public SafiFundPersonType safiFundPersonType { get; set; }
         public Classifier clsRequirement{ get; set; }
 

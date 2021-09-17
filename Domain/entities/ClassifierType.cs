@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using static Domain.helpers.HelpersDatabase;
 
 namespace Domain.entities
@@ -22,6 +23,7 @@ namespace Domain.entities
 
         #region "Relationship ingoing"
 
+        [JsonIgnore]
         public List<ClassifierType> classifierTypes{ get; set; }
 
         #endregion

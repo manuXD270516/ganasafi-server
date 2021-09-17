@@ -15,6 +15,7 @@ using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace rest_api_ganasafi
@@ -36,13 +37,13 @@ namespace rest_api_ganasafi
             services.AddPersistenceInfrastructure(Configuration);
             services.AddApiVersioning();
 
-            services.AddControllers();
+            services.AddControllers();//.AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "rest_api_ganasafi", Version = "v1" });
             });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

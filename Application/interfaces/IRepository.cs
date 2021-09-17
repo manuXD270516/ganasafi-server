@@ -18,8 +18,11 @@ namespace Application.interfaces
             RequestParameter pagination = null
         );
         Task<TEntity> FindByIdAsync(long id);
+        Task<TEntity> FindFirstOrDefault(Expression<Func<TEntity, bool>> filter = null);
         Task<int> CreateAsync(TEntity entity);
         Task<bool> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(long id);
+
+        
     }
 }

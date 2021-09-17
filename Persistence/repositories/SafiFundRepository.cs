@@ -116,10 +116,6 @@ namespace Persistence.repositories
 
             return safiFoundCollection.FirstOrDefault();
         }
-
-        public Task<GetSafiFundDto> FindFirstOrDefault(Expression<Func<GetSafiFundDto, bool>> filter = null)
-        {
-            return null;
-        }
+        
     }
 }

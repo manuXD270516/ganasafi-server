@@ -14,8 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="features\safiContract\parameters\" />
-    <Folder Include="features\safiContract\queries\" />
     <Folder Include="features\safiContract\validators\" />
     <Folder Include="features\safiFundRequirement\commands\" />
     <Folder Include="features\safiFundRequirement\parameters\" />

@@ -20,7 +20,7 @@ namespace Application.interfaces
           RequestParameter pagination = null
       );
 
-        Task<GetSafiFundDto> FindFirstOrDefault(Expression<Func<GetSafiFundDto, bool>> filter = null);
+        //Task<GetSafiFundDto> FindFirstOrDefault(Expression<Func<GetSafiFundDto, bool>> filter = null);
 
         Task<SafiFund> FindBySafiFundId(int safiFundId, string codPersonType);
     }

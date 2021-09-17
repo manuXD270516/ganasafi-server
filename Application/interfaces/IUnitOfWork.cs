@@ -9,6 +9,7 @@ namespace Application.interfaces
         ISafiDataTransferRepository _safiDataTransferRepository { get; }
         ISafiFundRepository _safiFundRepository { get; }
         ISafiFundRequirementRepository _safiFundRequirementRepository{ get; }
+        ISafiContractRepository _safiContractRepository { get; }
 
     }
 }

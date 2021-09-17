@@ -25,6 +25,7 @@ namespace Persistence
             services.AddTransient<ISafiDataTransferRepository, SafiDataTransferRepository>();
             services.AddTransient<ISafiFundRepository, SafiFundRepository>();
             services.AddTransient<ISafiFundRequirementRepository, SafiFundRequirementRepository>();
+            services.AddTransient<ISafiContractRepository, SaficontractRepository>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
