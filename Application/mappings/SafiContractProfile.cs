@@ -12,8 +12,8 @@ namespace Application.mappings
 
         public SafiContractProfile()
         {
-            CreateMap<SafiContract, GetSafiContractDto>();
-                //.ForMember(dest => dest.safiContractId, opt => opt.MapFrom(src => src.id));
+            CreateMap<SafiContract, GetSafiContractDto>()
+                .ForMember(dest => dest.safiContractId, opt => opt.MapFrom(src => src.id));
         }
     }
 }
