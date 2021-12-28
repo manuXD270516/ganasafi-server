@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Persistence.options;
 using rest_api_ganasafi.Extensions;
 using Shared;
 using System;
@@ -49,6 +50,9 @@ namespace rest_api_ganasafi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*var databaseSettings = new DatabaseSettings();
+            Configuration.Bind(nameof(DatabaseSettings), databaseSettings);*/
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

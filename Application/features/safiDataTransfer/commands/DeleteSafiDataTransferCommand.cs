@@ -34,7 +34,8 @@ namespace Application.features.safiDataTransfer.commands
             var result  = await _unitOfWork._safiDataTransferRepository.DeleteAsync(request.id);
             return new Response<bool>
             {
-                message = $"SAFI Data Transfer with Id: {request.id} deleted successfully"
+                data = result,
+                message = $"SAFI Data Transfer with Id: {request.id} {(result ? "deleted successfully": "not deleted")}"
             };
         
         }

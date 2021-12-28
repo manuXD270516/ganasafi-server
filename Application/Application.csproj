@@ -19,7 +19,6 @@
     <Folder Include="features\safiFundRequirement\parameters\" />
     <Folder Include="features\safiFundRequirement\queries\" />
     <Folder Include="features\safiFundRequirement\validators\" />
-    <Folder Include="features\safiFund\commands\" />
     <Folder Include="features\safiFund\validators\" />
     <Folder Include="features\safiOpeningRequest\commands\" />
     <Folder Include="features\safiOpeningRequest\parameters\" />

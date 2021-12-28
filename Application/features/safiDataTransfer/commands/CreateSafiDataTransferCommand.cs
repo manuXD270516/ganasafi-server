@@ -19,6 +19,7 @@ namespace Application.features.safiDataTransfer.commands.createSafiDataTransfer
 
         public string description { get; set; }
 
+        public int idClsCurrencyTransfer { get; set; }
     }
 
     public class CreateSafiDataTransferCommandHandler : IRequestHandler<CreateSafiDataTransferCommand, Response<int>>

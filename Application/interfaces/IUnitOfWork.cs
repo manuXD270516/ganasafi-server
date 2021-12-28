@@ -10,6 +10,5 @@ namespace Application.interfaces
         ISafiFundRepository _safiFundRepository { get; }
         ISafiFundRequirementRepository _safiFundRequirementRepository{ get; }
         ISafiContractRepository _safiContractRepository { get; }
-
     }
 }

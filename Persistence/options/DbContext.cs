@@ -18,6 +18,7 @@ namespace Persistence.options
             _dbStrategy = providerType switch
             {
                 "Postgresql" => _dbStrategy = new PostgreSqlStrategy(),
+                //"MySQL" => _dbStrategy = new MySQLStrategy(),
                 _ => null
             };
 

@@ -46,7 +46,7 @@ namespace Application.features.safiFund.queries
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
+            
 
         public async Task<PageResponse<List<GetSafiFundDto>>> Handle(GetAllSafiFundQuery request, CancellationToken cancellationToken)
         {

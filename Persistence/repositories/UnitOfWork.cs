@@ -15,8 +15,10 @@ namespace Persistence.repositories
 
         public ISafiContractRepository _safiContractRepository { get; }
 
-
-        public UnitOfWork(ISafiDataTransferRepository safiDataTransferRepository, ISafiFundRepository safiFundRepository, ISafiFundRequirementRepository safiFundRequirementRepository, ISafiContractRepository safiContractRepository)
+        public UnitOfWork(ISafiDataTransferRepository safiDataTransferRepository,
+                        ISafiFundRepository safiFundRepository,
+                        ISafiFundRequirementRepository safiFundRequirementRepository,
+                        ISafiContractRepository safiContractRepository)
         {
             _safiDataTransferRepository = safiDataTransferRepository;
             _safiFundRepository = safiFundRepository;

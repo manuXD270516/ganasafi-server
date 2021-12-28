@@ -14,7 +14,9 @@ namespace Application.mappings
         {
 
             CreateMap<SafiFund, GetSafiFundRequirementByIdDto>()
-                .ForMember(dest => dest.safiFundPersonTypeDtos, o => o.MapFrom(src => src.safiFundPersonTypes));
+                .ForMember(
+                       dest => dest.safiFundPersonTypeDtos, 
+                       o => o.MapFrom(src => src.safiFundPersonTypes));
         }
 
         

@@ -8,9 +8,9 @@ using static Domain.helpers.HelpersDatabase;
 namespace Domain.entities
 {
     [Table(TABLE_NAME_CLASSIFIER_TYPE)]
-    public class ClassifierType
+    public class ClassifierType: AuditableBaseEntity
     {
-        public int id { get; set; }
+        //public int id { get; set; }
         public string code { get; set; }
         public string shortDescription { get; set; }
         public string description { get; set; }

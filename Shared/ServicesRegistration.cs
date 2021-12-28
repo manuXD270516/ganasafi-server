@@ -14,6 +14,7 @@ namespace Shared
         {
 
             services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddMemoryCache();
         }
 
     }

@@ -22,5 +22,14 @@ namespace rest_api_ganasafi.Controllers.v1
                 idFundPersonType = filterParams.idFundPersonType
             }));
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> GetByFilter2([FromQuery] GetSafiContractParameters filterParams)
+        {
+            return Ok(await Mediator.Send(new ExampleQuery
+            {
+                x = 1
+            }));
+        }
     }
 }

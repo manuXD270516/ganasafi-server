@@ -18,8 +18,6 @@ namespace Application.specifications
             {
                 Query.Search(sdt => sdt.accountNumber.ToString(), $"%{accountNumber}%");
             }
-
-
         }
     }
 }

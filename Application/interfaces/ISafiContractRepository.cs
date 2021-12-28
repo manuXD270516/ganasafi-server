@@ -7,5 +7,6 @@ namespace Application.interfaces
 {
     public interface ISafiContractRepository : IRepository<SafiContract>
     {
+        
     }
 }

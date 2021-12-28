@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rest-api-ganasafi", "rest-api-ganasafi\rest-api-ganasafi.csproj", "{6D345D27-F736-42D4-984C-EDD183392B0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration-APIS", "Integration-APIS\Integration-APIS.csproj", "{25540159-C381-4B96-9DD2-2FED86865197}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{6D345D27-F736-42D4-984C-EDD183392B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D345D27-F736-42D4-984C-EDD183392B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D345D27-F736-42D4-984C-EDD183392B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25540159-C381-4B96-9DD2-2FED86865197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25540159-C381-4B96-9DD2-2FED86865197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25540159-C381-4B96-9DD2-2FED86865197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25540159-C381-4B96-9DD2-2FED86865197}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{E46B071B-877B-49EA-94D6-6EA0EF105639} = {BFA1DFDB-0E14-45CE-B4E3-3AAD1871CCC2}
 		{13531B9F-1180-4F58-AFAD-2409A394AC1C} = {BFA1DFDB-0E14-45CE-B4E3-3AAD1871CCC2}
 		{6D345D27-F736-42D4-984C-EDD183392B0E} = {4C369675-61AE-45EA-87CA-56CC92D8F94F}
+		{25540159-C381-4B96-9DD2-2FED86865197} = {BFA1DFDB-0E14-45CE-B4E3-3AAD1871CCC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58C9CDB9-7563-44A2-8909-6D6C270A238C}

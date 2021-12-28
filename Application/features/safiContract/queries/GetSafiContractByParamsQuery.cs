@@ -17,18 +17,13 @@ namespace Application.features.safiContract.queries
 
         #region "Filter params"
         public int idFundPersonType { get; set; }
-
+        
         #endregion
-
-
-
     }
 
     public class GetSafiContractByParamsQueryHandler : IRequestHandler<GetSafiContractByParamsQuery, Response<GetSafiContractDto>>
     {
-
         private readonly IUnitOfWork _unitOfWork;
-
         private readonly IMapper _mapper;
 
         public GetSafiContractByParamsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
@@ -37,6 +32,7 @@ namespace Application.features.safiContract.queries
             _mapper = mapper;
         }
 
+        
         public async Task<Response<GetSafiContractDto>> Handle(GetSafiContractByParamsQuery request, CancellationToken cancellationToken)
         {
             var safiContractFind = await _unitOfWork._safiContractRepository.FindFirstOrDefault(e => e.idFundPersonType == request.idFundPersonType);

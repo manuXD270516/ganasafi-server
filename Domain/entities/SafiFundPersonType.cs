@@ -11,7 +11,7 @@ namespace Domain.entities
     {
 
         #region "Relationships ingoing"
-        public int id { get; set; }
+        //public int id { get; set; }
 
         // deprecated
         public List<SafiFundPersonTypeRequirement> safiFundPersonTypeRequirements { get; set; }

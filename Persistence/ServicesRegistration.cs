@@ -22,6 +22,7 @@ namespace Persistence
 
             #region "Repositories" 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddTransient<ISafiDataTransferRepository, SafiDataTransferRepository>();
             services.AddTransient<ISafiFundRepository, SafiFundRepository>();
             services.AddTransient<ISafiFundRequirementRepository, SafiFundRequirementRepository>();

@@ -76,7 +76,7 @@ namespace Application.features.safiDataTransfer.queries
                 request.pageNumber, 
                 request.pageSize, 
                 additionalPropsFromRequest[HelpersConstApplication.KEY_TOTAL_COUNT]
-            ) ;
+            );
         }
 
 

@@ -11,7 +11,7 @@ using Application.behaviours;
 
 namespace Application
 {
-    public static class ServiceRegistration
+    public static class ServicesRegistration
     {
         public static void AddApplicationLayer(this IServiceCollection services)
         {

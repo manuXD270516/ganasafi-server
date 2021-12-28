@@ -19,7 +19,6 @@ namespace Persistence.repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-
         protected IDbConnection DbConnection { get; private set; }
         private readonly DatabaseSettings _dbSettings;
 
@@ -30,6 +29,7 @@ namespace Persistence.repositories
                 .SetStrategy(_dbSettings.providerName)
                 .GetDbContext(_dbSettings.connectionString);
         }
+
 
         public async Task<int> CreateAsync(TEntity entity)
         {
@@ -57,14 +57,15 @@ namespace Persistence.repositories
                     PropertyInfo tzLockProp = entityType.GetProperty("tzLock");
                     tzLockProp.SetValue(entity, 0, null);
 
-
                 }
 
                 var inserted = await DbConnection.InsertAsync(entity);
 
                 return inserted;
-            } finally { 
-                DbConnection.Close(); 
+            }
+            finally
+            {
+                DbConnection.Close();
             }
         }
 
@@ -73,12 +74,14 @@ namespace Persistence.repositories
             DbConnection.Open();
             try
             {
-                var entity = await DbConnection.GetAsync<TEntity>(id);
+                //var entity = await DbConnection.GetAsync<TEntity>(id);
+                var entity = await FindByIdAsync(id);
 
-                if (entity == null) {
+                if (entity == null || entity == default(TEntity))
+                {
                     return false;
                 }
-                
+
                 Type entityType = entity.GetType();
                 if (entityType.IsSubclassOf(typeof(AuditableBaseEntity)))
                 {
@@ -103,32 +106,44 @@ namespace Persistence.repositories
         public async Task<IQueryable<TEntity>> FindAllAsync(
             Dictionary<string, int> additionalProps,
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             RequestParameter pagination = null)
         {
             DbConnection.Open();
             try
             {
                 var results = (await DbConnection.GetAllAsync<TEntity>())
-                    .AsQueryable();
+                    .ToList();
 
-                additionalProps[HelpersConstApplication.KEY_TOTAL_COUNT] = results.Count();
+                var resultsQueryable = results.Where((entity) =>
+                {
 
+                    Type entityType = entity.GetType();
+                    bool filter = false;
+                    if (entityType.IsSubclassOf(typeof(AuditableBaseEntity)))
+                    {
+                        PropertyInfo propState = entityType.GetProperty("state");
+                        filter = ((string)propState.GetValue(entity)).Equals("A");
+                    }
+                    return filter;
+                }).AsQueryable();
                 if (pagination != null)
                 {
                     int pageNumber = pagination.pageNumber, pageSize = pagination.pageSize;
-                    results = results.Skip((pageNumber - 1) * pageSize)
+                    resultsQueryable = resultsQueryable.Skip((pageNumber - 1) * pageSize)
                         .Take(pageSize);
                 }
                 if (filter != null)
                 {
-                    results = results.Where(filter);
+                    resultsQueryable = resultsQueryable.Where(filter);
                 }
-                if (orderBy!= null)
+                if (orderBy != null)
                 {
-                    results = orderBy(results);
+                    resultsQueryable = orderBy(resultsQueryable);
                 }
-                return results;
+                additionalProps[HelpersConstApplication.KEY_TOTAL_COUNT] = results.Count();
+
+                return resultsQueryable;
             }
             finally { DbConnection.Close(); }
         }
@@ -138,7 +153,14 @@ namespace Persistence.repositories
             DbConnection.Open();
             try
             {
-                return await DbConnection.GetAsync<TEntity>(id);
+                var entity = await DbConnection.GetAsync<TEntity>(id);
+                Type entityType = entity.GetType();
+                if (entityType.IsSubclassOf(typeof(AuditableBaseEntity)))
+                {
+                    PropertyInfo propState = entityType.GetProperty("state");
+                    return ((string)propState.GetValue(entity)).Equals("A") ? entity : default(TEntity);
+                }
+                return default(TEntity);
             }
             finally { DbConnection.Close(); }
         }
@@ -149,14 +171,13 @@ namespace Persistence.repositories
             try
             {
                 Type entityType = entity.GetType();
-                if (entityType.IsSubclassOf(typeof(AuditableBaseEntity))){
-
+                if (entityType.IsSubclassOf(typeof(AuditableBaseEntity)))
+                {
                     PropertyInfo modificationDateProp = entityType.GetProperty("modificationDate");
                     modificationDateProp.SetValue(entity, DateTime.UtcNow, null);
 
                     PropertyInfo modificationUserProp = entityType.GetProperty("modificationUser");
                     modificationUserProp.SetValue(entity, "root", null);
-
                 }
                 return await DbConnection.UpdateAsync(entity);
             }
@@ -169,13 +190,26 @@ namespace Persistence.repositories
             try
             {
                 var results = (await DbConnection.GetAllAsync<TEntity>())
-                    .AsQueryable();
+                    .ToList();
+
+                var resultsQueryable = results.Where((entity) =>
+                {
+
+                    Type entityType = entity.GetType();
+                    bool filter = false;
+                    if (entityType.IsSubclassOf(typeof(AuditableBaseEntity)))
+                    {
+                        PropertyInfo propState = entityType.GetProperty("state");
+                        filter = ((string)propState.GetValue(entity)).Equals("A");
+                    }
+                    return filter;
+                }).AsQueryable();
 
                 if (filter != null)
                 {
-                    results = results.Where(filter);
+                    resultsQueryable = resultsQueryable.Where(filter);
                 }
-                return results.FirstOrDefault();
+                return resultsQueryable.FirstOrDefault();
             }
             finally { DbConnection.Close(); }
         }

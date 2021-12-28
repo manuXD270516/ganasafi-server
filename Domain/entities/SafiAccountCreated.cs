@@ -7,9 +7,9 @@ using static Domain.helpers.HelpersDatabase;
 namespace Domain.entities
 {
     [Table(TABLE_NAME_SAFI_ACCOUNT_CREATED)]
-    public class SafiAccountCreated
+    public class SafiAccountCreated : AuditableBaseEntity
     {
-		public int id { get; set; }
+		//public int id { get; set; }
 		public double personNumber { get; set; }
 		public double originAccount { get; set; }
 		public double destinationAccount { get; set; }

@@ -12,7 +12,5 @@ namespace Persistence.repositories
         public SaficontractRepository(DatabaseSettings dbSettings) : base(dbSettings)
         {
         }
-
-
     }
 }

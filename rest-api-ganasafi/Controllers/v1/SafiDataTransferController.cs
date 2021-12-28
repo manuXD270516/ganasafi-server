@@ -19,7 +19,7 @@ namespace rest_api_ganasafi.Controllers.v1
 
         // POST api/SafiDataTransfer
         [HttpPost]
-        public async Task<IActionResult> Post(CreateSafiDataTransferCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateSafiDataTransferCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
@@ -27,17 +27,18 @@ namespace rest_api_ganasafi.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllSafiDataTransferParameters parameters)
         {
-            return Ok(await Mediator.Send(new GetAllSafiDataTransfersQuery
+            var result = await Mediator.Send(new GetAllSafiDataTransfersQuery
             {
                 pageNumber = parameters.pageNumber,
                 pageSize = parameters.pageSize,
                 accountNumber = parameters.accountNumber,
                 orderByDirection = parameters.orderByDirection
-            })) ;
+            });
+            return Ok(result);
         }
 
         [HttpPut(ROUTE_PARAM_ID)]
-        public async Task<IActionResult> Put(UpdateSafiDataTransferCommand command, [FromRoute] int id)
+        public async Task<IActionResult> Put([FromBody] UpdateSafiDataTransferCommand command, [FromRoute] int id)
         {
             if (command.id != id)
             {

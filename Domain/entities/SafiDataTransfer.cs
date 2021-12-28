@@ -16,6 +16,8 @@ namespace Domain.entities
 
         public string description { get; set; }
 
+        public int idClsCurrencyTransfer { get; set; }
+
         #region "Relationships ingoing"
 
 
@@ -23,7 +25,7 @@ namespace Domain.entities
 
         #region "Relationship outgoing"
 
-        public List<SafiFund> safiFunds { get; set; }
+        //public List<SafiFund> safiFunds { get; set; }
 
 
         #endregion

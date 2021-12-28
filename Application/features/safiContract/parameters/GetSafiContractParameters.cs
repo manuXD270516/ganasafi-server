@@ -7,5 +7,6 @@ namespace Application.features.safiContract.parameters
     public class GetSafiContractParameters
     {
         public int idFundPersonType { get; set; }
+        
     }
 }

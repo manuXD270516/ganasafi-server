@@ -14,10 +14,11 @@ namespace Application.mappings
         public SafiDataTransferProfile()
         {
             CreateMap<CreateSafiDataTransferCommand, SafiDataTransfer>();
+            CreateMap<UpdateSafiDataTransferCommand, SafiDataTransfer>();
+
             CreateMap<SafiDataTransfer, SafiDataTransferDto>();
             CreateMap<List<SafiDataTransfer>, List<SafiDataTransferDto>>();
 
-            CreateMap<UpdateSafiDataTransferCommand, SafiDataTransfer> ();
 
         }
     }
